@@ -14,8 +14,5 @@ class Metasploit::Model::Search::Group::Base < Metasploit::Model::Base
   # Validations
   #
 
-  validates :children,
-            :length => {
-                :minimum => 1
-            }
+  validates :children, length: { minimum: 1 }
 end

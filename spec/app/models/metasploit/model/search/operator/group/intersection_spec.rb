@@ -2,9 +2,9 @@ RSpec.describe Metasploit::Model::Search::Operator::Group::Intersection, type: :
   it { is_expected.to be_a Metasploit::Model::Search::Operator::Group::Base }
 
   context 'operation_class_name' do
-    subject(:operation_class_name) {
+    subject(:operation_class_name) do
       described_class.operation_class_name
-    }
+    end
 
     it { is_expected.to eq('Metasploit::Model::Search::Operation::Group::Intersection') }
   end

@@ -16,7 +16,7 @@ class Metasploit::Model::Search::Operator::Deprecated::Authority < Metasploit::M
   #
 
   validates :abbreviation,
-            :presence => true
+            presence: true
 
   #
   # Methods

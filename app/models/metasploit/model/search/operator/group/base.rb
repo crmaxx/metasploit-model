@@ -47,7 +47,7 @@ class Metasploit::Model::Search::Operator::Group::Base < Metasploit::Model::Sear
   # @param formatted_value [String] value parsed from formatted operation
   # @return [Array<Metasploit::Model::Search::Operation::Base>]
   def children(formatted_value)
-    raise NotImplementedError
+    fail NotImplementedError
   end
 
   # (see operation_class)
@@ -69,9 +69,9 @@ class Metasploit::Model::Search::Operator::Group::Base < Metasploit::Model::Sear
     valid_children = children.select(&:valid?)
 
     operation_class.new(
-        :children => valid_children,
-        :operator => self,
-        :value => formatted_value
+      children: valid_children,
+      operator: self,
+      value: formatted_value
     )
   end
 end

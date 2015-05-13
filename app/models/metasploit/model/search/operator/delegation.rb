@@ -31,9 +31,7 @@ class Metasploit::Model::Search::Operator::Delegation < Metasploit::Model::Searc
     name = formatted_operator.to_sym
     operator = klass.search_operator_by_name[name]
 
-    unless operator
-      raise ArgumentError, "No operator with name #{name.inspect} on #{klass}"
-    end
+    fail ArgumentError, "No operator with name #{name.inspect} on #{klass}" unless operator
 
     operator
   end

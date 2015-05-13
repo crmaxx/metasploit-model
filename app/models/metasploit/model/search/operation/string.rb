@@ -6,6 +6,5 @@ class Metasploit::Model::Search::Operation::String < Metasploit::Model::Search::
   # Validations
   #
 
-  validates :value,
-            :presence => true
+  validates :value, presence: true
 end

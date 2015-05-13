@@ -1,8 +1,8 @@
 RSpec.describe Metasploit::Model::Search::Operation::Set, type: :model do
   subject(:set) do
     described_class.new(
-        operator: operator,
-        value: value
+      operator: operator,
+      value: value
     )
   end
 
@@ -26,13 +26,13 @@ RSpec.describe Metasploit::Model::Search::Operation::Set, type: :model do
         end
 
         let(:human_attribute_set) do
-          "{#{attribute_set.sort.map(&:inspect).join(", ")}}"
+          "{#{attribute_set.sort.map(&:inspect).join(', ')}}"
         end
 
         let(:error) do
           I18n.translate(
-              'metasploit.model.errors.models.metasploit/model/search/operation/set.attributes.value.inclusion',
-              set: human_attribute_set
+            'metasploit.model.errors.models.metasploit/model/search/operation/set.attributes.value.inclusion',
+            set: human_attribute_set
           )
         end
 
@@ -57,11 +57,7 @@ RSpec.describe Metasploit::Model::Search::Operation::Set, type: :model do
             #
             # @return [Array]
             define_singleton_method("#{attribute}_set") do
-              [
-                  :a,
-                  :b,
-                  :c
-              ]
+              [:a, :b, :c]
             end
           end
         end
@@ -72,21 +68,17 @@ RSpec.describe Metasploit::Model::Search::Operation::Set, type: :model do
 
         let(:types) do
           [
-              {
-                  set: :integer
-              },
-              {
-                  set: :string
-              }
+            { set: :integer },
+            { set: :string }
           ]
         end
 
         context 'with operator' do
           let(:operator) do
             Metasploit::Model::Search::Operator::Attribute.new(
-                attribute: attribute,
-                klass: klass,
-                type: type
+              attribute: attribute,
+              klass: klass,
+              type: type
             )
           end
 

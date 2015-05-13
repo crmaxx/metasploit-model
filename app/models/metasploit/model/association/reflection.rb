@@ -28,9 +28,9 @@ class Metasploit::Model::Association::Reflection < Metasploit::Model::Base
   # Validations
   #
 
-  validates :model, :presence => true
-  validates :name, :presence => true
-  validates :class_name, :presence => true
+  validates :model, presence: true
+  validates :name, presence: true
+  validates :class_name, presence: true
 
   #
   # Methods

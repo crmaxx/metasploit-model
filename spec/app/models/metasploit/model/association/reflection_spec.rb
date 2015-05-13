@@ -10,7 +10,6 @@ RSpec.describe Metasploit::Model::Association::Reflection, type: :model do
       reflection.klass
     end
 
-
     let(:class_name) do
       FactoryGirl.generate :metasploit_model_association_reflection_class_name
     end
@@ -29,9 +28,9 @@ RSpec.describe Metasploit::Model::Association::Reflection, type: :model do
 
     let(:reflection) do
       described_class.new(
-          :model => model,
-          :name => name,
-          :class_name => class_name
+        model: model,
+        name: name,
+        class_name: class_name
       )
     end
 

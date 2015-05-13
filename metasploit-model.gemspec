@@ -28,12 +28,12 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'yard', '< 0.8.7.4'
 
   # Dependency loading
-  rails_version_constraints = ['>= 4.0.9', '< 4.1.0']
+  rails_version_constraints = '>= 4.2.1'
 
-  spec.add_runtime_dependency 'activemodel', *rails_version_constraints
-  spec.add_runtime_dependency 'activesupport', *rails_version_constraints
+  spec.add_runtime_dependency 'activemodel', rails_version_constraints
+  spec.add_runtime_dependency 'activesupport', rails_version_constraints
 
-  spec.add_runtime_dependency 'railties', *rails_version_constraints
+  spec.add_runtime_dependency 'railties', rails_version_constraints
 
   if RUBY_PLATFORM =~ /java/
     # markdown formatting for yard

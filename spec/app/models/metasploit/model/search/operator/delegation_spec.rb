@@ -1,7 +1,7 @@
 RSpec.describe Metasploit::Model::Search::Operator::Delegation, type: :model do
   subject(:operator) do
     described_class.new(
-        :klass => klass
+      klass: klass
     )
   end
 
@@ -51,7 +51,7 @@ RSpec.describe Metasploit::Model::Search::Operator::Delegation, type: :model do
     end
 
     let(:formatted_operator) do
-      double('Formatted Operator', :to_sym => :formatted_operator)
+      double('Formatted Operator', to_sym: :formatted_operator)
     end
 
     let(:search_operator) do
@@ -60,7 +60,7 @@ RSpec.describe Metasploit::Model::Search::Operator::Delegation, type: :model do
 
     let(:search_operator_by_name) do
       {
-          formatted_operator.to_sym => search_operator
+        formatted_operator.to_sym => search_operator
       }
     end
 
@@ -88,9 +88,9 @@ RSpec.describe Metasploit::Model::Search::Operator::Delegation, type: :model do
       end
 
       it 'should raise ArgumentError' do
-        expect {
+        expect do
           named_operator
-        }.to raise_error(ArgumentError, "No operator with name #{formatted_operator.to_sym.inspect} on #{klass}")
+        end.to raise_error(ArgumentError, "No operator with name #{formatted_operator.to_sym.inspect} on #{klass}")
       end
     end
   end

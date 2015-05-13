@@ -10,29 +10,27 @@ group :development, :test do
   gem 'factory_girl', '>= 4.1.0'
   # auto-load factories from spec/factories
   gem 'factory_girl_rails'
+  gem 'fuubar'
 end
 
 group :test do
   # rails is not used because activerecord should not be included, but rails would normally coordinate the versions
   # between its dependencies, which is now handled by this constraint.
-  rails_version_constraint = [
-      '>= 4.0.9',
-      '< 4.1.0'
-  ]
+  rails_version_constraint = '>= 4.2.1'
 
   # Dummy app uses actionpack for ActionController, but not rails since it doesn't use activerecord.
-  gem 'actionpack', *rails_version_constraint
+  gem 'actionpack', rails_version_constraint
   # Uploads simplecov reports to coveralls.io
   gem 'coveralls', require: false
   # Engine tasks are loaded using railtie
-  gem 'railties', *rails_version_constraint
+  gem 'railties', rails_version_constraint
   gem 'rspec-rails', '~> 3.1'
   # In a full rails project, factory_girl_rails would be in both the :development, and :test group, but since we only
   # want rails in :test, factory_girl_rails must also only be in :test.
   # add matchers from shoulda, such as validates_presence_of, which are useful for testing validations
   gem 'shoulda-matchers'
   # code coverage of tests
-  gem 'simplecov', :require => false
+  gem 'simplecov', require: false
   # defines time zones for activesupport.  Must be explicit since it is normally implicit with activerecord
   gem 'tzinfo'
 end

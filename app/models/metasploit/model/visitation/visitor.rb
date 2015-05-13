@@ -29,11 +29,11 @@ class Metasploit::Model::Visitation::Visitor < Metasploit::Model::Base
   #
 
   validates :block,
-            :presence => true
+            presence: true
   validates :module_name,
-            :presence => true
+            presence: true
   validates :parent,
-            :presence => true
+            presence: true
 
   #
   # Methods
@@ -46,7 +46,7 @@ class Metasploit::Model::Visitation::Visitor < Metasploit::Model::Base
   # @yield [node] Block instance_exec'd on instance of :parent class.
   # @yieldparam node [Object] node being {Metasploit::Model::Visitation::Visit#visit visited}.
   # @yieldreturn [Object] translation of `node`.
-  def initialize(attributes={}, &block)
+  def initialize(attributes = {}, &block)
     attributes.assert_valid_keys(:module_name, :parent)
 
     @block = block
@@ -61,7 +61,7 @@ class Metasploit::Model::Visitation::Visitor < Metasploit::Model::Base
   # @raise [TypeError] if `instance` is not a {#parent}.
   def visit(instance, node)
     unless instance.is_a? parent
-      raise TypeError, "#{instance} is not an instance of #{parent}, so it cannot be visited."
+      fail TypeError, "#{instance} is not an instance of #{parent}, so it cannot be visited."
     end
 
     instance.instance_exec(node, &block)

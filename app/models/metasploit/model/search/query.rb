@@ -53,12 +53,10 @@ class Metasploit::Model::Search::Query < Metasploit::Model::Base
   # Validations
   #
 
-  validates :klass, :presence => true
+  validates :klass, presence: true
 
   validates :operations,
-            :length => {
-                :minimum => 1
-            }
+            length: { minimum: 1 }
   # validate recursive so misnamed operators or bad values for operator's types cause the query to be invalid as a whole
   validate :operations_valid
 
@@ -91,12 +89,12 @@ class Metasploit::Model::Search::Query < Metasploit::Model::Base
   # @return [Array<Metasploit::Model::Search::Operation::Base>] an Array of operation parsed from {#formatted}.
   def operations
     unless instance_variable_defined? :@operations
-      @operations = formatted_operations.flat_map { |formatted_operation|
+      @operations = formatted_operations.flat_map do |formatted_operation|
         Metasploit::Model::Search::Operation.parse(
-            :formatted_operation => formatted_operation,
-            :query => self
+          formatted_operation: formatted_operation,
+          query: self
         )
-      }
+      end
     end
 
     @operations
@@ -134,7 +132,7 @@ class Metasploit::Model::Search::Query < Metasploit::Model::Base
     operator = klass.search_operator_by_name[operator_name]
 
     unless operator
-      operator = Metasploit::Model::Search::Operator::Null.new(:name => operator_name)
+      operator = Metasploit::Model::Search::Operator::Null.new(name: operator_name)
     end
 
     operator
@@ -148,10 +146,10 @@ class Metasploit::Model::Search::Query < Metasploit::Model::Base
   def tree
     unless instance_variable_defined? :@tree
       unions = operations_by_operator.collect do |_operator, operations|
-        Metasploit::Model::Search::Group::Union.new(:children => operations)
+        Metasploit::Model::Search::Group::Union.new(children: operations)
       end
 
-      @tree = Metasploit::Model::Search::Group::Intersection.new(:children => unions)
+      @tree = Metasploit::Model::Search::Group::Intersection.new(children: unions)
     end
 
     @tree
@@ -169,8 +167,8 @@ class Metasploit::Model::Search::Query < Metasploit::Model::Base
       filtered_operations = self.operations - operations
 
       self.class.new(
-          klass: klass,
-          operations: filtered_operations
+        klass: klass,
+        operations: filtered_operations
       )
     else
       self

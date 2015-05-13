@@ -36,7 +36,7 @@ class Metasploit::Model::Search::Operator::Base < Metasploit::Model::Base
   # Validations
   #
 
-  validates :klass, :presence => true
+  validates :klass, presence: true
 
   # @abstract subclass and derive operator name from attributes of subclass.
   #
@@ -45,6 +45,6 @@ class Metasploit::Model::Search::Operator::Base < Metasploit::Model::Base
   # @return [String]
   # @raise [NotImplementedError]
   def name
-    raise NotImplementedError
+    fail NotImplementedError
   end
 end

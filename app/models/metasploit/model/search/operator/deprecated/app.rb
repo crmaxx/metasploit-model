@@ -7,8 +7,8 @@ class Metasploit::Model::Search::Operator::Deprecated::App < Metasploit::Model::
 
   # Maps values passed to deprecated `app` operator to the equivalent value for the `stance` operator.
   STANCE_BY_APP = {
-      'client' => 'passive',
-      'server' => 'aggressive'
+    'client' => 'passive',
+    'server' => 'aggressive'
   }
 
   #

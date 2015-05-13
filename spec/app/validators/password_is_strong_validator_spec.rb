@@ -1,7 +1,7 @@
 RSpec.describe PasswordIsStrongValidator do
   subject(:password_is_strong_validator) do
     described_class.new(
-        :attributes => attributes
+      attributes: attributes
     )
   end
 
@@ -11,7 +11,7 @@ RSpec.describe PasswordIsStrongValidator do
 
   let(:attributes) do
     [
-        attribute
+      attribute
     ]
   end
 
@@ -153,7 +153,7 @@ RSpec.describe PasswordIsStrongValidator do
         #
 
         validates attribute,
-                  :password_is_strong => true
+                  password_is_strong: true
       end
     end
 

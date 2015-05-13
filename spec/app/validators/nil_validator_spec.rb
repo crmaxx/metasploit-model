@@ -1,7 +1,7 @@
 RSpec.describe NilValidator do
   subject(:nil_validator) do
     described_class.new(
-        :attributes => attributes
+      attributes: attributes
     )
   end
 
@@ -11,7 +11,7 @@ RSpec.describe NilValidator do
 
   let(:attributes) do
     [
-        attribute
+      attribute
     ]
   end
 
@@ -35,8 +35,7 @@ RSpec.describe NilValidator do
         # Validations
         #
 
-        validates attribute,
-                  :nil => true
+        validates attribute, nil: true
       end
     end
 

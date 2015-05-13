@@ -17,11 +17,9 @@ class Metasploit::Model::Search::Operation::Date < Metasploit::Model::Search::Op
   # @return [Date] if `formatted_value.to_s` is parseable with `Date.parse`.
   # @return [#to_s] `formatted_value` if `formatted_value` is not parseable with `Date.parse`.
   def value=(formatted_value)
-    begin
-      @value = Date.parse(formatted_value.to_s)
-    rescue ArgumentError
-      @value = formatted_value
-    end
+    @value = Date.parse(formatted_value.to_s)
+  rescue ArgumentError
+    @value = formatted_value
   end
 
   private
@@ -30,8 +28,7 @@ class Metasploit::Model::Search::Operation::Date < Metasploit::Model::Search::Op
   #
   # @return [void]
   def date_value
-    unless value.is_a? Date
-      errors.add(:value, :unparseable_date)
-    end
+    return if value.is_a? Date
+    errors.add(:value, :unparseable_date)
   end
 end

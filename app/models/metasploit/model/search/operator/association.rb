@@ -21,15 +21,14 @@ class Metasploit::Model::Search::Operator::Association < Metasploit::Model::Sear
   # Validations
   #
 
-  validates :association, :presence => true
-  validates :source_operator, :presence => true
+  validates :association, presence: true
+  validates :source_operator, presence: true
 
   #
   # Methods
   #
 
-  delegate :help,
-           to: :source_operator
+  delegate :help, to: :source_operator
 
   # The name of this operator.
   #
@@ -46,8 +45,8 @@ class Metasploit::Model::Search::Operator::Association < Metasploit::Model::Sear
   #   {#source_operator} operating on `formatted_value`.
   def operate_on(formatted_value)
     Metasploit::Model::Search::Operation::Association.new(
-        operator: self,
-        source_operation: source_operator.operate_on(formatted_value)
+      operator: self,
+      source_operation: source_operator.operate_on(formatted_value)
     )
   end
 end

@@ -19,8 +19,8 @@ require 'rspec/rails'
 gem_specification = Gem::Specification.find_all_by_name('metasploit-version').first
 
 roots = [
-    Metasploit::Model::Engine.root.to_path,
-    gem_specification.gem_dir
+  Metasploit::Model::Engine.root.to_path,
+  gem_specification.gem_dir
 ]
 
 roots.each do |root|

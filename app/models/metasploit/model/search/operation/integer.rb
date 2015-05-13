@@ -8,7 +8,7 @@ class Metasploit::Model::Search::Operation::Integer < Metasploit::Model::Search:
   #
 
   validates :value,
-            :numericality => {
-                :only_integer => true
+            numericality: {
+              only_integer: true
             }
 end

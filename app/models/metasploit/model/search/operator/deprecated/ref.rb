@@ -32,19 +32,9 @@ class Metasploit::Model::Search::Operator::Deprecated::Ref < Metasploit::Model::
     end
 
     operations = []
-
-    unless abbreviation.blank?
-      operations << operator('authorities.abbreviation').operate_on(abbreviation)
-    end
-
-    unless designation.blank?
-      operations << operator('references.designation').operate_on(designation)
-    end
-
-    unless url.blank?
-      operations << operator('references.url').operate_on(url)
-    end
-
+    operations << operator('authorities.abbreviation').operate_on(abbreviation) unless abbreviation.blank?
+    operations << operator('references.designation').operate_on(designation) unless designation.blank?
+    operations << operator('references.url').operate_on(url) unless url.blank?
     operations
   end
 end

@@ -39,25 +39,17 @@ class Metasploit::Model::Search::Operator::Single < Metasploit::Model::Search::O
   # @return [String]
   def self.constant_name(type)
     case type
-      when Hash
-        if type.length < 1
-          raise ArgumentError, "Cannot destructure a Hash without entries"
-        end
+    when Hash
+      fail ArgumentError, "Cannot destructure a Hash without entries" if type.length < 1
+      fail ArgumentError, "Cannot destructure a Hash with multiple entries" if type.length > 1
 
-        if type.length > 1
-          raise ArgumentError, "Cannot destructure a Hash with multiple entries"
-        end
-
-        partial_types = type.first
-        partial_constant_names = partial_types.collect { |partial_type|
-          constant_name(partial_type)
-        }
-
-        partial_constant_names.join(MODULE_SEPARATOR)
-      when Symbol
-        type.to_s.camelize
-      else
-        raise ArgumentError, "Can only convert Hashes and Symbols to constant names, not #{type.inspect}"
+      type.first.collect do |partial_type|
+        constant_name(partial_type)
+      end.join(MODULE_SEPARATOR)
+    when Symbol
+      type.to_s.camelize
+    else
+      fail ArgumentError, "Can only convert Hashes and Symbols to constant names, not #{type.inspect}"
     end
   end
 
@@ -68,8 +60,8 @@ class Metasploit::Model::Search::Operator::Single < Metasploit::Model::Search::O
   # @return [Metasploit::Model::Search::Operation::Base] instance of {#operation_class}.
   def operate_on(formatted_value)
     operation_class.new(
-        :value => formatted_value,
-        :operator => self
+      value: formatted_value,
+      operator: self
     )
   end
 
@@ -80,7 +72,7 @@ class Metasploit::Model::Search::Operator::Single < Metasploit::Model::Search::O
   # @return [Symbol]
   # @raise [NotImplementedError]
   def type
-    raise NotImplementedError
+    fail NotImplementedError
   end
 
   protected
@@ -104,7 +96,7 @@ class Metasploit::Model::Search::Operator::Single < Metasploit::Model::Search::O
   def operation_class_name
     unless instance_variable_defined? :@operation_class_name
       unless type
-        raise ArgumentError, "#{self.class}##{__method__} cannot be derived for #{name} operator because its type is nil"
+        fail ArgumentError, "#{self.class}##{__method__} cannot be derived for #{name} operator because its type is nil"
       end
 
       partial_constant_names = [OPERATION_NAMESPACE_NAME]

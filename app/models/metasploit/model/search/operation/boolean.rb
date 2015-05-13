@@ -7,8 +7,8 @@ class Metasploit::Model::Search::Operation::Boolean < Metasploit::Model::Search:
 
   # Take a String formatted {#value} and returns its unformatted value for validation.
   FORMATTED_VALUE_TO_VALUE = {
-      'false' => false,
-      'true' => true
+    'false' => false,
+    'true' => true
   }
 
   #
@@ -16,12 +16,12 @@ class Metasploit::Model::Search::Operation::Boolean < Metasploit::Model::Search:
   #
 
   validates :value,
-            :inclusion => {
-                :in => [
-                    false,
-                    true
-                ],
-                :message => :boolean
+            inclusion: {
+              in: [
+                false,
+                true
+              ],
+              message: :boolean
             }
 
   # Sets {Metasploit::Model::Search::Operation::Base#value} by type casting String boolean to actual `false` or `true`.

@@ -9,20 +9,8 @@ RSpec.describe Metasploit::Model::Search::Operator::Attribute, type: :model do
 
       it { is_expected.to include(:boolean) }
       it { is_expected.to include(:date) }
-      it {
-        is_expected.to include(
-                   {
-                       set: :integer
-                   }
-               )
-      }
-      it {
-        is_expected.to include(
-                   {
-                       set: :string
-                   }
-               )
-      }
+      it { is_expected.to include(set: :integer) }
+      it { is_expected.to include(set: :string) }
       it { is_expected.to include(:integer) }
       it { is_expected.to include(:string) }
     end
@@ -44,8 +32,8 @@ RSpec.describe Metasploit::Model::Search::Operator::Attribute, type: :model do
 
     let(:attribute_operator) do
       described_class.new(
-          attribute: attribute,
-          klass: klass
+        attribute: attribute,
+        klass: klass
       )
     end
 
@@ -54,24 +42,18 @@ RSpec.describe Metasploit::Model::Search::Operator::Attribute, type: :model do
     end
 
     let(:klass) do
-      Class.new.tap { |klass|
+      Class.new.tap do |klass|
         expected_attribute_set = self.expected_attribute_set
 
         klass.define_singleton_method("#{attribute}_set") do
           expected_attribute_set
         end
-      }
+      end
     end
 
     context 'with responds to #attribute_set_method_name' do
       let(:expected_attribute_set) do
-        Set.new(
-            [
-                :a,
-                :b,
-                :c
-            ]
-        )
+        Set.new([:a, :b, :c])
       end
 
       it 'should be #klass #<attribute>_set' do
@@ -91,7 +73,7 @@ RSpec.describe Metasploit::Model::Search::Operator::Attribute, type: :model do
 
     let(:attribute_operator) do
       described_class.new(
-          :attribute => attribute
+        attribute: attribute
       )
     end
 

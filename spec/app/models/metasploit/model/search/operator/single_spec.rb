@@ -34,11 +34,11 @@ RSpec.describe Metasploit::Model::Search::Operator::Single, type: :model do
           {}
         end
 
-        specify {
-          expect {
+        specify do
+          expect do
             constant_name
-          }.to raise_error(ArgumentError, "Cannot destructure a Hash without entries")
-        }
+          end.to raise_error(ArgumentError, "Cannot destructure a Hash without entries")
+        end
       end
 
       context 'with one entry' do
@@ -52,7 +52,7 @@ RSpec.describe Metasploit::Model::Search::Operator::Single, type: :model do
 
         let(:type) do
           {
-              key => value
+            key => value
           }
         end
 
@@ -72,16 +72,16 @@ RSpec.describe Metasploit::Model::Search::Operator::Single, type: :model do
       context 'with multiple entries' do
         let(:type) do
           {
-              key1: :value1,
-              key2: :value2
+            key1: :value1,
+            key2: :value2
           }
         end
 
-        specify {
-          expect {
+        specify do
+          expect do
             constant_name
-          }.to raise_error(ArgumentError, 'Cannot destructure a Hash with multiple entries')
-        }
+          end.to raise_error(ArgumentError, 'Cannot destructure a Hash with multiple entries')
+        end
       end
     end
 
@@ -100,11 +100,11 @@ RSpec.describe Metasploit::Model::Search::Operator::Single, type: :model do
         nil
       end
 
-      specify {
-        expect {
+      specify do
+        expect do
           constant_name
-        }.to raise_error(ArgumentError, "Can only convert Hashes and Symbols to constant names, not #{type.inspect}")
-      }
+        end.to raise_error(ArgumentError, "Can only convert Hashes and Symbols to constant names, not #{type.inspect}")
+      end
     end
   end
 
@@ -126,7 +126,7 @@ RSpec.describe Metasploit::Model::Search::Operator::Single, type: :model do
     end
 
     it 'should call new on #operation_class' do
-      expect(operation_class).to receive(:new).with(:value => formatted_value, :operator => operator)
+      expect(operation_class).to receive(:new).with(value: formatted_value, operator: operator)
 
       operate_on
     end
@@ -168,7 +168,7 @@ RSpec.describe Metasploit::Model::Search::Operator::Single, type: :model do
       context 'with set: :integer' do
         let(:type) do
           {
-              set: :integer
+            set: :integer
           }
         end
 
@@ -178,7 +178,7 @@ RSpec.describe Metasploit::Model::Search::Operator::Single, type: :model do
       context 'with set: :string' do
         let(:type) do
           {
-              set: :string
+            set: :string
           }
         end
 
@@ -215,11 +215,10 @@ RSpec.describe Metasploit::Model::Search::Operator::Single, type: :model do
         end
 
         it 'should raise ArgumentError' do
-          expect {
-            operation_class
-          }.to raise_error(
-                   ArgumentError,
-                   "#{described_class}#operation_class_name cannot be derived for #{name} operator because its type is nil")
+          expect { operation_class }.to raise_error(
+            ArgumentError,
+            "#{described_class}#operation_class_name cannot be derived for #{name} operator because its type is nil"
+          )
         end
       end
     end
@@ -254,7 +253,7 @@ RSpec.describe Metasploit::Model::Search::Operator::Single, type: :model do
       context 'with set: :integer' do
         let(:type) do
           {
-              set: :integer
+            set: :integer
           }
         end
 
@@ -264,7 +263,7 @@ RSpec.describe Metasploit::Model::Search::Operator::Single, type: :model do
       context 'with set: :string' do
         let(:type) do
           {
-              set: :string
+            set: :string
           }
         end
 
@@ -301,11 +300,10 @@ RSpec.describe Metasploit::Model::Search::Operator::Single, type: :model do
         end
 
         it 'should raise ArgumentError' do
-          expect {
-            operation_class_name
-          }.to raise_error(
-                   ArgumentError,
-                   "#{described_class}#operation_class_name cannot be derived for #{name} operator because its type is nil")
+          expect { operation_class_name }.to raise_error(
+            ArgumentError,
+            "#{described_class}#operation_class_name cannot be derived for #{name} operator because its type is nil"
+          )
         end
       end
     end
@@ -317,9 +315,7 @@ RSpec.describe Metasploit::Model::Search::Operator::Single, type: :model do
     end
 
     it 'should not be implemented' do
-      expect {
-        type
-      }.to raise_error(NotImplementedError)
+      expect { type }.to raise_error(NotImplementedError)
     end
   end
 end

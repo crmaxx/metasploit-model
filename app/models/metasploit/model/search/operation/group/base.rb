@@ -29,9 +29,7 @@ class Metasploit::Model::Search::Operation::Group::Base < Metasploit::Model::Sea
   #
 
   validates :children,
-            :length => {
-                :minimum => 1
-            }
+            length: { minimum: 1 }
 
   #
   # Methods
@@ -47,13 +45,9 @@ class Metasploit::Model::Search::Operation::Group::Base < Metasploit::Model::Sea
   #
   # @return [void]
   def children_valid
-    if children.is_a? Enumerable
-      # can't use children.all?(&:valid?) as it will short-circuit and want all children to have validation errors
-      valids = children.map(&:valid?)
-
-      unless valids.all?
-        errors.add(:children, :invalid, value: children)
-      end
-    end
+    return unless children.is_a? Enumerable
+    # can't use children.all?(&:valid?) as it will short-circuit and want all children to have validation errors
+    valids = children.map(&:valid?)
+    errors.add(:children, :invalid, value: children) unless valids.all?
   end
 end

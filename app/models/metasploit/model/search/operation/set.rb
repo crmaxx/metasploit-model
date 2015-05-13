@@ -19,21 +19,19 @@ class Metasploit::Model::Search::Operation::Set < Metasploit::Model::Search::Ope
   #
   # @return [void]
   def membership
-    if operator
-      attribute_set = operator.attribute_set
+    return unless operator
+    attribute_set = operator.attribute_set
 
-      unless attribute_set.include? value
-        # sort (because Sets are unordered) before inspecting so that lexigraphical sorting is NOT used
-        sorted = attribute_set.sort
-        # use inspect to differentiate between strings and integers or string and symbols
-        inspected = sorted.map(&:inspect)
+    return if attribute_set.include? value
+    # sort (because Sets are unordered) before inspecting so that lexigraphical sorting is NOT used
+    sorted = attribute_set.sort
+    # use inspect to differentiate between strings and integers or string and symbols
+    inspected = sorted.map(&:inspect)
 
-        # format as a human readable Set using { }
-        comma_separated = inspected.join(', ')
-        human_set = "{#{comma_separated}}"
+    # format as a human readable Set using { }
+    comma_separated = inspected.join(', ')
+    human_set = "{#{comma_separated}}"
 
-        errors.add(:value, :inclusion, set: human_set)
-      end
-    end
+    errors.add(:value, :inclusion, set: human_set)
   end
 end

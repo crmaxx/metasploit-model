@@ -14,7 +14,7 @@ RSpec.describe Metasploit::Model::Search::Operation::Date, type: :model do
       end
 
       let(:operation) do
-        described_class.new(:value => value)
+        described_class.new(value: value)
       end
 
       context 'with Date' do
@@ -45,7 +45,7 @@ RSpec.describe Metasploit::Model::Search::Operation::Date, type: :model do
     end
 
     let(:operation) do
-      described_class.new(:value => formatted_value)
+      described_class.new(value: formatted_value)
     end
 
     context 'with Date' do

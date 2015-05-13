@@ -24,9 +24,7 @@ RSpec.describe Metasploit::Model::Search::Operator::Base, type: :model do
     end
 
     it 'should not be implemented' do
-      expect {
-        name
-      }.to raise_error(NotImplementedError)
+      expect { name }.to raise_error(NotImplementedError)
     end
   end
 end

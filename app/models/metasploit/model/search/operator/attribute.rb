@@ -7,16 +7,16 @@ class Metasploit::Model::Search::Operator::Attribute < Metasploit::Model::Search
 
   # The valid {#type types}.
   TYPES = [
-      :boolean,
-      :date,
-      :integer,
-      {
-          set: :integer
-      },
-      {
-          set: :string
-      },
-      :string
+    :boolean,
+    :date,
+    :integer,
+    {
+      set: :integer
+    },
+    {
+      set: :string
+    },
+    :string
   ]
 
   #
@@ -39,10 +39,10 @@ class Metasploit::Model::Search::Operator::Attribute < Metasploit::Model::Search
   # Validations
   #
 
-  validates :attribute, :presence => true
+  validates :attribute, presence: true
   validates :type,
-            :inclusion => {
-                :in => TYPES
+            inclusion: {
+              in: TYPES
             }
 
   #

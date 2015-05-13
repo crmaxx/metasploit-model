@@ -8,16 +8,14 @@ RSpec.describe Metasploit::Model::Visitation::Visitor, type: :model do
   context '#initialize' do
     subject(:instance) do
       described_class.new(
-          :module_name => module_name,
-          :parent => parent,
-          &block
+        module_name: module_name,
+        parent: parent,
+        &block
       )
     end
 
     let(:block) do
-      lambda { |node|
-        node
-      }
+      ->(node) { node }
     end
 
     let(:module_name) do

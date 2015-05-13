@@ -27,7 +27,7 @@ RSpec.describe Metasploit::Model::Search::Operation::Boolean, type: :model do
     end
 
     let(:operation) do
-      described_class.new(:value => formatted_value)
+      described_class.new(value: formatted_value)
     end
 
     context "with 'false'" do

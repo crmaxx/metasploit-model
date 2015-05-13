@@ -24,7 +24,7 @@ RSpec.describe Metasploit::Model::Search::Operation::Group::Base, type: :model d
 
         let(:group) do
           described_class.new(
-              children: children
+            children: children
           )
         end
 
@@ -34,9 +34,7 @@ RSpec.describe Metasploit::Model::Search::Operation::Group::Base, type: :model d
           #
 
           let(:children) do
-            Array.new(2) { |i|
-              double("Child #{i}")
-            }
+            Array.new(2) { |i| double("Child #{i}") }
           end
 
           #
@@ -104,13 +102,13 @@ RSpec.describe Metasploit::Model::Search::Operation::Group::Base, type: :model d
     context 'with attribute' do
       let(:expected_children) do
         [
-            double('child')
+          double('child')
         ]
       end
 
       let(:group) do
         described_class.new(
-            children: expected_children
+          children: expected_children
         )
       end
 

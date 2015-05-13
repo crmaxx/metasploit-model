@@ -21,7 +21,6 @@ class Metasploit::Model::Search::Operator::Null < Metasploit::Model::Search::Ope
   #
   # @return [nil]
   def type
-    nil
   end
 
   protected

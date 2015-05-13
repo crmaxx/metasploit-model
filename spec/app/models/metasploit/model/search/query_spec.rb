@@ -13,8 +13,8 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
 
       let(:query) do
         described_class.new(
-            :formatted => formatted,
-            :klass => klass
+          formatted: formatted,
+          klass: klass
         )
       end
 
@@ -28,8 +28,8 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
       context 'length' do
         let(:error) do
           I18n.translate(
-              'metasploit.model.errors.models.metasploit/model/search/query.attributes.operations.too_short',
-              :count => 1
+            'metasploit.model.errors.models.metasploit/model/search/query.attributes.operations.too_short',
+            count: 1
           )
         end
 
@@ -72,7 +72,7 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
         end
 
         before(:each) do
-          operation = double('Invalid Operation', :valid? => valid)
+          operation = double('Invalid Operation', valid?: valid)
           allow(query).to receive(:operations).and_return([operation])
         end
 
@@ -126,8 +126,8 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
     context 'with unquoted value' do
       let(:expected_formatted_operations) do
         [
-            'formatted_operator1:formatted_value1',
-            'formatted_operator2:formatted_value2'
+          'formatted_operator1:formatted_value1',
+          'formatted_operator2:formatted_value2'
         ]
       end
 
@@ -165,7 +165,7 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
 
       let(:query) do
         described_class.new(
-            formatted_operations: expected_formatted_operations
+          formatted_operations: expected_formatted_operations
         )
       end
 
@@ -193,8 +193,8 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
 
       let(:query) do
         described_class.new(
-            formatted: formatted,
-            klass: klass
+          formatted: formatted,
+          klass: klass
         )
       end
 
@@ -225,7 +225,7 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
 
       let(:query) do
         described_class.new(
-            operations: expected_operations
+          operations: expected_operations
         )
       end
 
@@ -257,8 +257,8 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
 
       let(:query) do
         described_class.new(
-            :formatted => formatted,
-            :klass => klass
+          formatted: formatted,
+          klass: klass
         )
       end
 
@@ -289,7 +289,7 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
         end
 
         before(:each) do
-          @operator = klass.search_attribute attribute, :type => type
+          @operator = klass.search_attribute attribute, type: type
         end
 
         context 'with boolean operator' do
@@ -436,8 +436,8 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
 
     let(:query) do
       described_class.new(
-          :formatted => formatted,
-          :klass => klass
+        formatted: formatted,
+        klass: klass
       )
     end
 
@@ -446,9 +446,9 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
 
       klass.send(:include, Metasploit::Model::Search)
 
-      @operators = [:first, :second].collect { |attribute|
-        klass.search_attribute attribute, :type => :string
-      }
+      @operators = [:first, :second].collect do |attribute|
+        klass.search_attribute attribute, type: :string
+      end
     end
 
     context 'with valid' do
@@ -471,9 +471,9 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
 
       it 'should have correct value for each operator' do
         @operators.each_with_index do |operator, i|
-          expected_formatted_values = 2.times.collect { |j|
+          expected_formatted_values = 2.times.collect do |j|
             "formatted_value(#{i},#{j})"
-          }
+          end
 
           operations = operations_by_operator[operator]
           actual_formatted_values = operations.map(&:value)
@@ -521,7 +521,7 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
 
     let(:query) do
       described_class.new(
-          :klass => klass
+        klass: klass
       )
     end
 
@@ -530,7 +530,7 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
 
       # include after stubbing const so that search_i18n_scope can use Class#name
       klass.send(:include, Metasploit::Model::Search)
-      @operator = klass.search_attribute attribute, :type => :string
+      @operator = klass.search_attribute attribute, type: :string
     end
 
     context 'with operator name' do
@@ -579,8 +579,8 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
 
     let(:query) do
       described_class.new(
-          :formatted => formatted,
-          :klass => klass
+        formatted: formatted,
+        klass: klass
       )
     end
 
@@ -588,8 +588,8 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
       stub_const('Queried', klass)
 
       klass.send(:include, Metasploit::Model::Search)
-      klass.search_attribute :thing_one, :type => :string
-      klass.search_attribute :thing_two, :type => :string
+      klass.search_attribute :thing_one, type: :string
+      klass.search_attribute :thing_two, type: :string
     end
 
     context 'root' do
@@ -612,9 +612,9 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
 
         it 'should have same operator for each child of a union' do
           children.each do |child|
-            operator_set = child.children.inject(Set.new) { |block_operator_set, operation|
+            operator_set = child.children.inject(Set.new) do |block_operator_set, operation|
               block_operator_set.add operation.operator
-            }
+            end
 
             expect(operator_set.length).to eq(1)
           end
@@ -651,9 +651,7 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
     #
 
     let(:attributes) do
-      Array.new(2) { |i|
-        "attribute_#{i}".to_sym
-      }
+      Array.new(2) { |i| "attribute_#{i}".to_sym }
     end
 
     let(:filtered_operator) do
@@ -665,15 +663,13 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
     end
 
     let(:operators) do
-      attributes.collect { |attribute|
-        klass.search_attribute attribute, type: :string
-      }
+      attributes.collect { |attribute| klass.search_attribute attribute, type: :string }
     end
 
     let(:query) do
       described_class.new(
-          formatted_operations: formatted_operations,
-          klass: klass
+        formatted_operations: formatted_operations,
+        klass: klass
       )
     end
 
@@ -693,9 +689,9 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
 
     context 'with operator' do
       let(:formatted_operations) do
-        operators.collect { |operator|
+        operators.collect do |operator|
           "#{operator.name}:value"
-        }
+        end
       end
 
       it 'should return a new query' do
@@ -713,7 +709,7 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
       context 'with no other operators' do
         let(:formatted_operations) do
           [
-              "#{filtered_operator.name}:value"
+            "#{filtered_operator.name}:value"
           ]
         end
 
@@ -727,9 +723,9 @@ RSpec.describe Metasploit::Model::Search::Query, type: :model do
 
     context 'without operator' do
       let(:formatted_operations) do
-        unfiltered_operators.collect { |operator|
+        unfiltered_operators.collect do |operator|
           "#{operator.name}:value"
-        }
+        end
       end
 
       it 'should return this query' do

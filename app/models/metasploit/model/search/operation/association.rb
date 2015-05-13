@@ -48,10 +48,8 @@ class Metasploit::Model::Search::Operation::Association < Metasploit::Model::Sea
   # @return [void]
   def source_operation_valid
     # presence validation handles errors when nil
-    if source_operation
-      unless source_operation.valid?
-        errors.add(:source_operation, :invalid)
-      end
-    end
+    return unless source_operation
+    return if source_operation.valid?
+    errors.add(:source_operation, :invalid)
   end
 end

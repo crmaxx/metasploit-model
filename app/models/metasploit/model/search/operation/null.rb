@@ -19,8 +19,7 @@ class Metasploit::Model::Search::Operation::Null < Metasploit::Model::Search::Op
   #
   # @return [void]
   def null_operator
-    unless operator.is_a? Metasploit::Model::Search::Operator::Null
-      errors.add(:operator, :type, :type => Metasploit::Model::Search::Operator::Null)
-    end
+    return if operator.is_a? Metasploit::Model::Search::Operator::Null
+    errors.add(:operator, :type, :type => Metasploit::Model::Search::Operator::Null)
   end
 end

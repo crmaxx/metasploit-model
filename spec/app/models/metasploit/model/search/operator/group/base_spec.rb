@@ -13,9 +13,7 @@ RSpec.describe Metasploit::Model::Search::Operator::Group::Base, type: :model do
     end
 
     it 'should be abstract' do
-      expect {
-        children
-      }.to raise_error(NotImplementedError)
+      expect { children }.to raise_error(NotImplementedError)
     end
   end
 
@@ -30,8 +28,8 @@ RSpec.describe Metasploit::Model::Search::Operator::Group::Base, type: :model do
 
     let(:children) do
       [
-          invalid_child,
-          valid_child
+        invalid_child,
+        valid_child
       ]
     end
 

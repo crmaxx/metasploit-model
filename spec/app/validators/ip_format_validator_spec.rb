@@ -1,7 +1,7 @@
 RSpec.describe IpFormatValidator do
   subject(:ip_format_validator) do
     described_class.new(
-        :attributes => attributes
+      attributes: attributes
     )
   end
 
@@ -11,7 +11,7 @@ RSpec.describe IpFormatValidator do
 
   let(:attributes) do
     [
-        attribute
+      attribute
     ]
   end
 
@@ -40,7 +40,7 @@ RSpec.describe IpFormatValidator do
         #
 
         validates attribute,
-                  :ip_format => true
+                  ip_format: true
       end
     end
 
@@ -104,7 +104,6 @@ RSpec.describe IpFormatValidator do
           expect(record.errors[attribute]).to include(error)
         end
       end
-
     end
 
     context 'without value' do

@@ -22,7 +22,7 @@ class Metasploit::Model::Search::Operation::Base < Metasploit::Model::Base
   #
 
   validates :operator,
-            :presence => true
+            presence: true
   # validate_associated is defined by ActiveRecord, so have to do it manually here.
   validate :operator_valid
 
@@ -32,8 +32,8 @@ class Metasploit::Model::Search::Operation::Base < Metasploit::Model::Base
   #
   # @return [void]
   def operator_valid
-    if operator and !operator.valid?
-      errors.add(:operator, :invalid, :value => operator)
+    if operator && !operator.valid?
+      errors.add(:operator, :invalid, value: operator)
     end
   end
 end

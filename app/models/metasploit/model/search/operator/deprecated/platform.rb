@@ -7,8 +7,8 @@ class Metasploit::Model::Search::Operator::Deprecated::Platform < Metasploit::Mo
 
   # Formatted operators that should be part of {#children} for this union.
   FORMATTED_OPERATORS = [
-      'platforms.fully_qualified_name',
-      'targets.name'
+    'platforms.fully_qualified_name',
+    'targets.name'
   ]
 
   #
@@ -26,7 +26,7 @@ class Metasploit::Model::Search::Operator::Deprecated::Platform < Metasploit::Mo
   #
 
   validates :name,
-            :presence => true
+            presence: true
 
   #
   # Methods
@@ -37,9 +37,9 @@ class Metasploit::Model::Search::Operator::Deprecated::Platform < Metasploit::Mo
   # @param formatted_value [String] value parsed from formatted operation.
   # @return [Array<Metasploit::Model::Search::Operation::Base>]
   def children(formatted_value)
-    FORMATTED_OPERATORS.collect { |formatted_operator|
+    FORMATTED_OPERATORS.collect do |formatted_operator|
       association_operator = operator(formatted_operator)
       association_operator.operate_on(formatted_value)
-    }
+    end
   end
 end

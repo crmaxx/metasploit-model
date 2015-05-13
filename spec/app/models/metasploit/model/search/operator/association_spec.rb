@@ -1,8 +1,8 @@
 RSpec.describe Metasploit::Model::Search::Operator::Association, type: :model do
   subject(:operator) do
     described_class.new(
-        :association => association,
-        :source_operator => source_operator
+      association: association,
+      source_operator: source_operator
     )
   end
 
@@ -38,16 +38,16 @@ RSpec.describe Metasploit::Model::Search::Operator::Association, type: :model do
       operator.name
     end
 
-    let(:source_operator) {
+    let(:source_operator) do
       double(
-          'Metasploit::Model::Search::Operator::Base',
-          name: source_operator_name
+        'Metasploit::Model::Search::Operator::Base',
+        name: source_operator_name
       )
-    }
+    end
 
-    let(:source_operator_name) {
+    let(:source_operator_name) do
       'source_operator_name'
-    }
+    end
 
     it { is_expected.to be_a Symbol }
 
@@ -57,35 +57,35 @@ RSpec.describe Metasploit::Model::Search::Operator::Association, type: :model do
   end
 
   context '#operate_on' do
-    subject(:operate_on) {
+    subject(:operate_on) do
       operator.operate_on(formatted_value)
-    }
+    end
 
     #
     # lets
     #
 
-    let(:expected_source_operation) {
+    let(:expected_source_operation) do
       double('source operation')
-    }
+    end
 
-    let(:formatted_value) {
+    let(:formatted_value) do
       'formatted-value'
-    }
+    end
 
-    let(:source_operator) {
-      super().tap { |source_operator|
+    let(:source_operator) do
+      super().tap do |source_operator|
         expect(source_operator).to receive(:operate_on).with(formatted_value).and_return(expected_source_operation)
-      }
-    }
+      end
+    end
 
     it { is_expected.to be_a Metasploit::Model::Search::Operation::Association }
 
     context 'Metasploit::Model::Search::Operation::Association' do
       context '#operator' do
-        subject(:operation_operator) {
+        subject(:operation_operator) do
           operate_on.operator
-        }
+        end
 
         it 'is this association operator' do
           expect(operation_operator).to eq(operator)
@@ -93,9 +93,9 @@ RSpec.describe Metasploit::Model::Search::Operator::Association, type: :model do
       end
 
       context '#source_operation' do
-        subject(:source_operation) {
+        subject(:source_operation) do
           operate_on.source_operation
-        }
+        end
 
         it 'is operation from Metasploit::Model::Search::Operator::Association#source_operator' do
           expect(source_operation).to eq(expected_source_operation)

@@ -5,11 +5,8 @@ class PasswordIsStrongValidator < ActiveModel::EachValidator
   #
 
   # Password that are used too often and will be easily guessed.
-  COMMON_PASSWORDS = %w{
-			password pass root admin metasploit
-			msf 123456 qwerty abc123 letmein monkey link182 demo
-			changeme test1234 rapid7
-		}
+  COMMON_PASSWORDS = %w(password pass root admin metasploit msf 123456 qwerty abc123 letmein monkey link182 demo
+                        changeme test1234 rapid7)
 
   # Validates that `value` is a strong password.  A password is strong if it meets the following rules:
   # * SHOULD contain at least one letter.
@@ -55,15 +52,15 @@ class PasswordIsStrongValidator < ActiveModel::EachValidator
       return true
     end
 
-    if (password.size % 2 == 0) and (password.scan(/../).uniq.size < 2)
+    if (password.size % 2 == 0) && (password.scan(/../).uniq.size < 2)
       return true
     end
 
-    if (password.size % 3 == 0) and (password.scan(/.../).uniq.size < 2)
+    if (password.size % 3 == 0) && (password.scan(/.../).uniq.size < 2)
       return true
     end
 
-    if (password.size % 4 == 0) and (password.scan(/..../).uniq.size < 2)
+    if (password.size % 4 == 0) && (password.scan(/..../).uniq.size < 2)
       return true
     end
 
@@ -79,7 +76,7 @@ class PasswordIsStrongValidator < ActiveModel::EachValidator
   def contains_username?(username, password)
     contains = false
 
-    unless password.blank? or username.blank?
+    unless password.blank? || username.blank?
       escaped_username = Regexp.escape(username)
       username_regexp = Regexp.new(escaped_username, Regexp::IGNORECASE)
 
@@ -110,6 +107,6 @@ class PasswordIsStrongValidator < ActiveModel::EachValidator
   # @return [false] if password contains a letter, digit and special character.
   # @return [true] otherwise
   def is_simple?(password)
-    not (password =~ /[A-Za-z]/ and password =~ /[0-9]/ and password =~ /[\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2a\x2b\x2c\x2d\x2e\x2f\x3a\x3b\x3c\x3d\x3e\x3f\x5b\x5c\x5d\x5e\x5f\x60\x7b\x7c\x7d\x7e]/)
+    !(password =~ /[A-Za-z]/ && password =~ /[0-9]/ && password =~ /[\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2a\x2b\x2c\x2d\x2e\x2f\x3a\x3b\x3c\x3d\x3e\x3f\x5b\x5c\x5d\x5e\x5f\x60\x7b\x7c\x7d\x7e]/)
   end
 end

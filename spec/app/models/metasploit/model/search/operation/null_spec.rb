@@ -4,8 +4,8 @@ RSpec.describe Metasploit::Model::Search::Operation::Null, type: :model do
       context 'null' do
         let(:error) do
           I18n.translate(
-              'metasploit.model.errors.models.metasploit/model/search/operation/null.attributes.operator.type',
-              type: Metasploit::Model::Search::Operator::Null
+            'metasploit.model.errors.models.metasploit/model/search/operation/null.attributes.operator.type',
+            type: Metasploit::Model::Search::Operator::Null
           )
         end
 
@@ -19,13 +19,13 @@ RSpec.describe Metasploit::Model::Search::Operation::Null, type: :model do
 
         let(:operation) do
           described_class.new(
-              :operator => operator
+            operator: operator
           )
         end
 
         let(:operator) do
           operator_class.new(
-              :klass => klass
+            klass: klass
           )
         end
 

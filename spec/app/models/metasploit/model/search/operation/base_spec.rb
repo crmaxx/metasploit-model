@@ -16,10 +16,9 @@ RSpec.describe Metasploit::Model::Search::Operation::Base, type: :model do
           I18n.translate('errors.messages.invalid')
         end
 
-
         let(:operation) do
           described_class.new(
-              :operator => operator
+            operator: operator
           )
         end
 
@@ -29,7 +28,7 @@ RSpec.describe Metasploit::Model::Search::Operation::Base, type: :model do
 
         context 'with operator' do
           let(:operator) do
-            double('Operator', :valid? => valid)
+            double('Operator', valid?: valid)
           end
 
           context 'with valid' do

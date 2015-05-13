@@ -1,7 +1,7 @@
 RSpec.describe ParametersValidator do
   subject(:parameters_validator) do
     described_class.new(
-        :attributes => attributes
+      attributes: attributes
     )
   end
 
@@ -34,10 +34,10 @@ RSpec.describe ParametersValidator do
   context '#error_at' do
     subject(:error_at) do
       parameters_validator.send(
-          :error_at,
-          :element => element,
-          :index => index,
-          :prefix => prefix
+        :error_at,
+        element: element,
+        index: index,
+        prefix: prefix
       )
     end
 
@@ -51,9 +51,9 @@ RSpec.describe ParametersValidator do
 
     it 'should include location_clause in same sentence as prefix' do
       location_clause = parameters_validator.send(
-          :location_clause,
-          :element => element,
-          :index => index
+        :location_clause,
+        element: element,
+        index: index
       )
 
       expect(error_at).to include("#{prefix} #{location_clause}.")
@@ -67,10 +67,10 @@ RSpec.describe ParametersValidator do
   context '#length_error_at' do
     subject(:length_error_at) do
       parameters_validator.send(
-          :length_error_at,
-          :element => element,
-          :extreme => extreme,
-          :index => index
+        :length_error_at,
+        element: element,
+        extreme: extreme,
+        index: index
       )
     end
 
@@ -91,9 +91,9 @@ RSpec.describe ParametersValidator do
   context '#location_clause' do
     subject(:location_clause) do
       parameters_validator.send(
-          :location_clause,
-          :element => element,
-          :index => index
+        :location_clause,
+        element: element,
+        index: index
       )
     end
 
@@ -116,9 +116,9 @@ RSpec.describe ParametersValidator do
     end
 
     let(:record) do
-      Object.new.tap { |object|
+      Object.new.tap do |object|
         object.extend ActiveModel::Validations
-      }
+      end
     end
 
     context 'with Array' do
@@ -141,11 +141,9 @@ RSpec.describe ParametersValidator do
               []
             end
 
-            it 'should call #length_error_at with :extreme => :few' do
+            it 'should call #length_error_at with extreme: :few' do
               expect(parameters_validator).to receive(:length_error_at).with(
-                  hash_including(
-                      :extreme => :few
-                  )
+                hash_including(extreme: :few)
               )
 
               validate_each
@@ -163,11 +161,9 @@ RSpec.describe ParametersValidator do
               ['', '', '']
             end
 
-            it 'should call #length_error_at with :extreme => :many' do
+            it 'should call #length_error_at with extreme: :many' do
               expect(parameters_validator).to receive(:length_error_at).with(
-                  hash_including(
-                      :extreme => :many
-                  )
+                hash_including(extreme: :many)
               )
 
               validate_each
@@ -202,9 +198,7 @@ RSpec.describe ParametersValidator do
 
                   it 'should call error_at with blank parameter name prefix' do
                     expect(parameters_validator).to receive(:error_at).with(
-                        hash_including(
-                          :prefix => 'has blank parameter name'
-                        )
+                      hash_including(prefix: 'has blank parameter name')
                     )
 
                     validate_each
@@ -237,9 +231,7 @@ RSpec.describe ParametersValidator do
 
                 it 'should call error_at with non-String prefix' do
                   expect(parameters_validator).to receive(:error_at).with(
-                      hash_including(
-                          :prefix => "has non-String parameter name (#{parameter_name.inspect})"
-                      )
+                    hash_including(prefix: "has non-String parameter name (#{parameter_name.inspect})")
                   )
 
                   validate_each
@@ -273,9 +265,7 @@ RSpec.describe ParametersValidator do
 
                 it 'should call error_at with non-String prefix' do
                   expect(parameters_validator).to receive(:error_at).with(
-                      hash_including(
-                          :prefix => "has non-String parameter value (#{parameter_value.inspect})"
-                      )
+                    hash_including(prefix: "has non-String parameter value (#{parameter_value.inspect})")
                   )
 
                   validate_each
@@ -298,9 +288,7 @@ RSpec.describe ParametersValidator do
 
           it 'should use #error_at with has non-Array for prefix' do
             expect(parameters_validator).to receive(:error_at).with(
-                hash_including(
-                    :prefix => 'has non-Array'
-                )
+              hash_including(prefix: 'has non-Array')
             )
 
             validate_each
@@ -326,9 +314,7 @@ RSpec.describe ParametersValidator do
 
       it 'should error that attribute is not an array' do
         expect(
-            errors.any? { |error|
-              error.include? 'is not an Array.'
-            }
+          errors.any? { |error| error.include? 'is not an Array.' }
         ).to eq(true)
       end
 
